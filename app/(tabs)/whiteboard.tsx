@@ -4,11 +4,36 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import { Colors } from '@/constants/theme';
 
 const App = () => {
+  
+  const [unit, setUnit] = useState('C'); // 'C' for Celsius, 'F' for Fahrenheit
+  const [selectedCity, setSelectedCity] = useState('Saskatoon'); // Default city
+
+  // Static weather data
+  const weatherData = [
+    { city: 'Saskatoon', temperatureC: 22, condition: 'Sunny' },
+    { city: 'Regina', temperatureC: 19, condition: 'Cloudy' },
+    { city: 'Prince Albert', temperatureC: 16, condition: 'Rainy' },
+  ];
+
+  const toggleUnit = () => {
+    setUnit((prevUnit) => (prevUnit === 'C' ? 'F' : 'C'));
+  };
+
+  const convertTemperature = (tempC) => {
+    return unit === 'C' ? tempC : (tempC * 9) / 5 + 32;
+  };
+
+  const handleCityChange = (event) => {
+    setSelectedCity(event.target.value);
+  };
+
+  const selectedWeather = weatherData.find((data) => data.city === selectedCity);
     return (
         <View style={styles.container}>
             <Text style={styles.text}></Text>
             <Button title="toggle farenheit"></Button>
         </View>
+        <Picker></Picker>
     )
 }
 
