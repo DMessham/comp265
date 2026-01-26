@@ -115,17 +115,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#222',
     padding: 10,
     margin: 5,
-    width: 200,
+    width: 192,
+    height:96,
     textAlign: 'left',
   },
   city: {
     fontWeight: 'bold',
+    fontSize: 22,
   },
   condition: {
     color: '#888',
   },
   temperature: {
-    color: '#aaa',
+    color: '#e2e2e2',
   },
   loading: {
     color: '#999',
