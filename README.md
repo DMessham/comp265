@@ -48,3 +48,21 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## E1 Plan
+
+Elements i need: Button, Text, Dropdown or radio buttons
+
+## to get something functional in expo go with only one error relating to the button text
+
+I followed the inclass demo for the dropdown
+
+I also copied a bit from the kitchen sink for replacing the divs
+
+## testing on device
+
+errors:
+
+## styling
+
+apply my "standard" colorscheme
