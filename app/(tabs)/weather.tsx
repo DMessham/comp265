@@ -3,18 +3,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from "@/components/themed-view";
 
 import { Picker } from '@react-native-picker/picker';
-
 import { View, Text, StyleSheet, Button } from 'react-native';
-
-import {
-    ActivityIndicator,
-    Alert,
-    Image,
-    Pressable,
-    ScrollView,
-    Switch,
-    TextInput
-} from "react-native";
 
 
 function WeatherApp() {
