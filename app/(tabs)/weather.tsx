@@ -32,40 +32,36 @@ function WeatherApp() {
     setUnit((prevUnit) => (prevUnit === 'C' ? 'F' : 'C'));
   };
 
-  const convertTemperature = (tempC) => {
+  const convertTemperature = (tempC: number) => {
     return unit === 'C' ? tempC : (tempC * 9) / 5 + 32;
-  };
-
-  const handleCityChange = (event) => {
-    setSelectedCity(event.target.value);
   };
 
   const selectedWeather = weatherData.find((data) => data.city === selectedCity);
 
-  let unitToggleText = `Toggle to ${unit === 'C' ? 'Fahrenheit' : 'Celsius'}`
-
   return (
     <ThemedView style={styles.container}>
       <ThemedText style={styles.header}>Weather App</ThemedText>
-      <Button onPress={toggleUnit} style={styles.toggleButton} title={<Text>Toggle to {unit === 'C' ? 'Fahrenheit' : 'Celsius'}</Text>}>
-      </Button>
       <ThemedView style={styles.selectorContainer}>
-        <ThemedText style={styles.label}>
-          Select a city:
-        </ThemedText>
+        
+        <Button 
+          onPress={toggleUnit} 
+          style={styles.toggleButton} 
+          title={<Text>Switch to {unit === 'C' ? 'Fahrenheit' : 'Celsius'}</Text>}>
+        </Button>
 
         <View style={{ padding: 2, margin: 3 }}>
+          <ThemedText style={styles.label}>
+            Select a city:
+          </ThemedText>
           <Picker
             selectedValue={selectedCity}
             onValueChange={(itemValue) => setSelectedCity(itemValue)}
           >
-            {weatherData.map((data, index) => (
+          {weatherData.map((data, index) => (
             <Picker.Item key={index} value={data.city} label={data.city}>
-              label={data.city}
             </Picker.Item>
           ))}
           </Picker>
-          <ThemedText style={{ marginTop: 10 }}>Selected: {selectedCity}</ThemedText>
         </View>
       </ThemedView>
       {selectedWeather ? (
@@ -113,28 +109,24 @@ const styles = StyleSheet.create({
     fontSize: '1rem',
   },
   weatherCard: {
-    border: '1px solid #ccc',
+    border: '1px solid #777',
     borderRadius: '5px',
-    padding: '15px',
-    margin: '10px',
+    background: '#555',
+    padding: '10px',
+    margin: '5px',
     width: '200px',
     textAlign: 'left',
-    background: '#111'
   },
   city: {
-    fontSize: '1.2rem',
     fontWeight: 'bold',
   },
   condition: {
-    fontSize: '1rem',
     color: '#888',
   },
   temperature: {
-    fontSize: '1.1rem',
     color: '#aaa',
   },
   loading: {
-    fontSize: '1rem',
     color: '#999',
   },
 });
