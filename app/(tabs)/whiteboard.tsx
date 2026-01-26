@@ -33,7 +33,6 @@ const App = () => {
             <Text style={styles.text}></Text>
             <Button title="toggle farenheit"></Button>
         </View>
-        <Picker></Picker>
     )
 }
 
