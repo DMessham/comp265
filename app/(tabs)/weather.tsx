@@ -3,7 +3,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from "@/components/themed-view";
 
 import { Picker } from '@react-native-picker/picker';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, Platform } from 'react-native';
 
 
 function WeatherApp() {
@@ -12,9 +12,10 @@ function WeatherApp() {
 
   // Static weather data
   const weatherData = [
-    { city: 'Saskatoon', temperatureC: 22, condition: 'Sunny' },
+    { city: 'Saskatoon', temperatureC: 22, condition: 'Sunny', feelsLikeC: 26 },
     { city: 'Regina', temperatureC: 19, condition: 'Cloudy' },
     { city: 'Prince Albert', temperatureC: 16, condition: 'Rainy' },
+    { city: 'Moose Jaw', temperatureC: -261, condition: null },
   ];
 
   const toggleUnit = () => {
@@ -35,7 +36,7 @@ function WeatherApp() {
         <Button 
           onPress={toggleUnit} 
           style={styles.toggleButton} 
-          title={<Text>Switch to {unit === 'C' ? 'Fahrenheit' : 'Celsius'}</Text>}>
+          title={`Switch to ${unit === 'C' ? 'Fahrenheit' : 'Celsius'}`}>
         </Button>
 
         <View style={{ padding: 2, margin: 3 }}>
