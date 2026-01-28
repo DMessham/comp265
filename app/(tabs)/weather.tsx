@@ -104,7 +104,7 @@ function WeatherApp() {
             <Pressable
               onPress={toggleUnit}
               style={styles.toggleButton}
-              title={`${unit === 'C' ? 'Switch to F' : 'Switch to C'}`}>
+              accessibilityHint={`${unit === 'C' ? 'Switch to F' : 'Switch to C'}`}>
                 <ThemedText style={styles.toggleButton}> | {unit === 'C' ? 'F' : 'C'}
                 </ThemedText>
             </Pressable>
