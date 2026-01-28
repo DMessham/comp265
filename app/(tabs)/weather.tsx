@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from "@/components/themed-view";
 
 import { Picker } from '@react-native-picker/picker';
-import { View, Text, StyleSheet, Button, Platform } from 'react-native';
+import { View, Text, StyleSheet, Button, Platform, Pressable } from 'react-native';
 
 function alertMSG(temp: number) {
   // some of these temps are based arbitrarily on vibe, and the use of less thans make things confusing in the positive range, but reworking it is more effort than its worth.
@@ -94,21 +94,23 @@ function WeatherApp() {
             </Picker.Item>
           ))}
         </Picker>
-
+        
       </View>
       {selectedWeather ? (
         <ThemedView style={styles.weatherCard}>
           <ThemedText style={styles.city}>{selectedWeather.city}</ThemedText>
           <ThemedText style={styles.temperature}>
             {convertTemperature(selectedWeather.temperatureC)}°{unit}
-            <Button
+            <Pressable
               onPress={toggleUnit}
               style={styles.toggleButton}
-              title={`${unit === 'C' ? 'C' : 'F'}`}>
-            </Button>
+              title={`${unit === 'C' ? 'Switch to F' : 'Switch to C'}`}>
+                <ThemedText style={styles.toggleButton}> | {unit === 'C' ? 'F' : 'C'}
+                </ThemedText>
+            </Pressable>
           </ThemedText>
           <ThemedText style={styles.condition}>{selectedWeather.condition}</ThemedText>
-
+          
           <ThemedText>
             {alertMSG(selectedWeather.temperatureC)}
           </ThemedText>
@@ -145,8 +147,11 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   toggleButton: {
-    padding: 12,
+    padding: 0,
     cursor: 'pointer',
+    color: '#eee7',
+    fontSize: 32,
+    fontWeight: 'normal',
   },
   selectorContainer: {
     marginBottom: 12,
@@ -197,6 +202,8 @@ const styles = StyleSheet.create({
     lineHeight: 42,
     marginTop: 52,
     flexDirection: 'row',
+    gap:13,
+    alignContent:"flex-end",
   },
   loading: {
     color: '#999',
