@@ -5,6 +5,40 @@ import { ThemedView } from "@/components/themed-view";
 import { Picker } from '@react-native-picker/picker';
 import { View, Text, StyleSheet, Button, Platform } from 'react-native';
 
+function alertMSG(temp:number) {
+  if(temp < -261) {
+    return("THE UNIVERSE HAS BROKEN, GOOD LUCK")
+  }else if(temp < -50){
+    return("Congrats on the new record! Try not to freeze!")
+  }else if(temp < -32){
+    return("Cover up exposed skin to avoid frostbite, Exposed skin can freeze in less than 3 minutes")
+  }else if(temp < -20){
+    return("Cover up exposed skin to avoid frostbite")
+  }else if(temp < -9){
+    return("Remember to wear layers you can remove if you start to overheat, especially if you plan on being physically active")
+  }else if(temp < 5){
+    return("Watch out for ice!\nRemember to wear layers you can remove if you start to overheat, especially if you plan on being physically active")
+  }else if(temp < 9){
+    return("Remember to wear layers you can remove if you start to overheat, especially if you plan on being physically active")
+  }else if(temp < 15){
+    return("nice")
+  }else if(temp < 20){
+    return("Spending a lot of time outdoors? Remember to bring water")
+  }else if(temp < 25){
+    return("Spending time outdoors? Remember to bring water & electrolytes")
+  }else if(temp < 30){
+    return("Remember to take breaks when outside and get some electrolytes with your water!")
+  }else if(temp < 45){
+    return("Take frequent breaks from the outdoors and remember to get some electrolytes with your water!")
+  }else if(temp > 60){
+    return(`"It's the end of the world as we know it\nIt's the end of the world as we know it\nIt's the end of the world as we know it, and I feel fine"\n from R.E.M`)
+  }else if(temp > 45){
+    return("Congrats on the new record! Try not to overheat!")
+  } else{
+    return("")
+  }
+}
+
 
 function WeatherApp() {
   const [unit, setUnit] = useState('C'); // 'C' for Celsius, 'F' for Fahrenheit
@@ -15,7 +49,7 @@ function WeatherApp() {
     { city: 'Saskatoon', temperatureC: 22, condition: 'Sunny', feelsLikeC: 26 },
     { city: 'Regina', temperatureC: 19, condition: 'Cloudy' },
     { city: 'Prince Albert', temperatureC: 16, condition: 'Rainy' },
-    { city: 'Moose Jaw', temperatureC: -261, condition: null },
+    { city: 'Moose Jaw', temperatureC: -261, condition: null},
   ];
 
   const toggleUnit = () => {
@@ -27,6 +61,8 @@ function WeatherApp() {
   };
 
   const selectedWeather = weatherData.find((data) => data.city === selectedCity);
+
+  let weatherAlert = null
 
   return (
     <ThemedView style={styles.container}>
@@ -62,7 +98,11 @@ function WeatherApp() {
             </Button>
           </ThemedText>
           <ThemedText style={styles.condition}>{selectedWeather.condition}</ThemedText>
+
+          {alertMSG(selectedWeather.temperatureC)}
+
         </ThemedView>
+        
       ) : (
         <ThemedText style={styles.loading}>No weather data available for "{selectedCity}" right now.</ThemedText>
       )}
