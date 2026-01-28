@@ -10,7 +10,7 @@ function alertMSG(temp:number) {
     return(`THE UNIVERSE HAS BROKEN, GOOD LUCK!`)
   }else if(temp == -69 || temp == 69){
     return("nice")
-  }else if(temp < -50){
+  }else if(temp < -70){
     return(`🧊🧊🧊\n"It's the end of the world as we know it\n It's the end of the world as we know it\n It's the end of the world as we know it, and I feel fine"\nfrom R.E.M`)
   }else if(temp < -45){
     return("Congrats on the new record! Try not to freeze!")
@@ -57,7 +57,8 @@ function WeatherApp() {
     { city: 'Saskatoon', temperatureC: 22, condition: 'Sunny', feelsLikeC: 26 },
     { city: 'Regina', temperatureC: 19, condition: 'Cloudy' },
     { city: 'Prince Albert', temperatureC: -200, condition: 'Rainy' },
-    { city: 'Moose Jaw', temperatureC: -61, condition: null},
+    { city: 'Moose Jaw', temperatureC: 61, condition: null},
+    { city: 'HELL', temperatureC: 666, condition: 'HELP'},
   ];
 
   const toggleUnit = () => {

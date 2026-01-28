@@ -255,17 +255,15 @@ export default function KitchenSinkStatesScreen() {
         <SafeAreaView style={styles.page}>
             <ScrollView contentContainerStyle={styles.content}>
                 <ThemedView>
-                    <ThemedText style={styles.h1}>UI States Kitchen Sink</ThemedText>
+                    <ThemedText style={styles.h1}>TransitTrac</ThemedText>
                     <ThemedText style={styles.p}>
                         This screen demonstrates core React Native building blocks and how a UI can
                         represent loading, error, empty, and success states.
                     </ThemedText>
 
-                    <DataPanel state={state} successContent={successContent}></DataPanel>
-
                     <TransitListItem itemType="loading" titleText="Example listitem">test</TransitListItem>
 
-                    <ControlsExample></ControlsExample>
+                    {/* <ControlsExample></ControlsExample> */}
 
                     <ThemedText style={styles.footer}>
                         Next step: refactor each state card into a reusable DataPanel component.
