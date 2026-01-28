@@ -30,7 +30,7 @@ function WeatherApp() {
 
   return (
     <ThemedView style={styles.container}>
-      <ThemedText style={styles.header}>Weather App</ThemedText>
+      <ThemedText style={styles.header}>DMessham StormTrac</ThemedText>
         <View style={styles.selectorContainer}>
           <ThemedText style={styles.label}>
             Select a city:
@@ -78,10 +78,12 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 32,
-    paddingTop: 16,
-    paddingBottom: 32,
+    padding: 16,
+    paddingTop: 42,
+    paddingBottom: 48,
+    marginBottom: 32,
     fontWeight: 800,
-    backgroundColor: '#222',
+    backgroundColor: '#2D3a2d',
   },
   dropdown: {
     color: '#eee',
@@ -99,7 +101,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#222',
     paddingLeft: 12,
     flexDirection: 'row',
-    margin:12
+    margin:12,
+    position: "absolute",
+    top: 72
   },
   label: {
     marginRight: 10,
