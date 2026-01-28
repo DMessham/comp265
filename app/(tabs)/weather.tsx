@@ -6,22 +6,26 @@ import { Picker } from '@react-native-picker/picker';
 import { View, Text, StyleSheet, Button, Platform } from 'react-native';
 
 function alertMSG(temp:number) {
-  if(temp < -261) {
-    return("THE UNIVERSE HAS BROKEN, GOOD LUCK")
+  if(temp < -260) {
+    return(`THE UNIVERSE HAS BROKEN, GOOD LUCK!`)
+  }else if(temp == -69 || temp == 69){
+    return("nice")
   }else if(temp < -50){
+    return(`🧊🧊🧊\n"It's the end of the world as we know it\n It's the end of the world as we know it\n It's the end of the world as we know it, and I feel fine"\nfrom R.E.M`)
+  }else if(temp < -45){
     return("Congrats on the new record! Try not to freeze!")
   }else if(temp < -32){
     return("Cover up exposed skin to avoid frostbite, Exposed skin can freeze in less than 3 minutes")
   }else if(temp < -20){
-    return("Cover up exposed skin to avoid frostbite")
-  }else if(temp < -9){
-    return("Remember to wear layers you can remove if you start to overheat, especially if you plan on being physically active")
+    return("Cover up exposed skin to avoid frostbite.")
+  }else if(temp < -5){
+    return("Remember to wear layers you can remove if you start to overheat, especially if you plan on being physically active.")
   }else if(temp < 5){
-    return("Watch out for ice!\nRemember to wear layers you can remove if you start to overheat, especially if you plan on being physically active")
+    return("Watch out for ice!\nRemember to wear layers you can remove if you start to overheat, especially if you plan on being physically active.")
   }else if(temp < 9){
-    return("Remember to wear layers you can remove if you start to overheat, especially if you plan on being physically active")
+    return("Remember to wear layers you can remove if you start to overheat, especially if you plan on being physically active.")
   }else if(temp < 15){
-    return("nice")
+    return("It's a nice day today, Maybe wear a light sweater")
   }else if(temp < 20){
     return("Spending a lot of time outdoors? Remember to bring water")
   }else if(temp < 25){
@@ -31,11 +35,15 @@ function alertMSG(temp:number) {
   }else if(temp < 45){
     return("Take frequent breaks from the outdoors and remember to get some electrolytes with your water!")
   }else if(temp > 60){
-    return(`"It's the end of the world as we know it\nIt's the end of the world as we know it\nIt's the end of the world as we know it, and I feel fine"\n from R.E.M`)
+    return(`Are you on fire yet?\n"It's the end of the world as we know it\nIt's the end of the world as we know it\nIt's the end of the world as we know it, and I feel fine"\n from R.E.M`)
   }else if(temp > 45){
     return("Congrats on the new record! Try not to overheat!")
+  }else if(temp == 420){
+    return("Heeyyy man")
+  }else if(temp == 666){
+    return("REPENT!!! THE END IS NIGH\NAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
   } else{
-    return("")
+    return("We don't know what to say!\nSomething has broken, Please let us know about this, and include info about your location, internet connection, and device so we can fix it.")
   }
 }
 
@@ -48,8 +56,8 @@ function WeatherApp() {
   const weatherData = [
     { city: 'Saskatoon', temperatureC: 22, condition: 'Sunny', feelsLikeC: 26 },
     { city: 'Regina', temperatureC: 19, condition: 'Cloudy' },
-    { city: 'Prince Albert', temperatureC: 16, condition: 'Rainy' },
-    { city: 'Moose Jaw', temperatureC: -261, condition: null},
+    { city: 'Prince Albert', temperatureC: -200, condition: 'Rainy' },
+    { city: 'Moose Jaw', temperatureC: -61, condition: null},
   ];
 
   const toggleUnit = () => {
@@ -99,7 +107,9 @@ function WeatherApp() {
           </ThemedText>
           <ThemedText style={styles.condition}>{selectedWeather.condition}</ThemedText>
 
-          {alertMSG(selectedWeather.temperatureC)}
+          <ThemedText>
+            {alertMSG(selectedWeather.temperatureC)}
+          </ThemedText>
 
         </ThemedView>
         
