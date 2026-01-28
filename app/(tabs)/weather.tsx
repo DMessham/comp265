@@ -31,19 +31,12 @@ function WeatherApp() {
   return (
     <ThemedView style={styles.container}>
       <ThemedText style={styles.header}>Weather App</ThemedText>
-      <ThemedView style={styles.selectorContainer}>
-        
-        <Button 
-          onPress={toggleUnit} 
-          style={styles.toggleButton} 
-          title={`Switch to ${unit === 'C' ? 'Fahrenheit' : 'Celsius'}`}>
-        </Button>
-
-        <View style={{ padding: 2, margin: 3 }}>
+        <View style={styles.selectorContainer}>
           <ThemedText style={styles.label}>
             Select a city:
           </ThemedText>
           <Picker
+            style={styles.dropdown}
             selectedValue={selectedCity}
             onValueChange={(itemValue) => setSelectedCity(itemValue)}
           >
@@ -52,18 +45,23 @@ function WeatherApp() {
             </Picker.Item>
           ))}
           </Picker>
+            
         </View>
-      </ThemedView>
       {selectedWeather ? (
         <ThemedView style={styles.weatherCard}>
           <ThemedText style={styles.city}>{selectedWeather.city}</ThemedText>
-          <ThemedText style={styles.condition}>{selectedWeather.condition}</ThemedText>
           <ThemedText style={styles.temperature}>
             {convertTemperature(selectedWeather.temperatureC)}°{unit}
+            <Button 
+              onPress={toggleUnit} 
+              style={styles.toggleButton} 
+              title={`${unit === 'C' ? 'C' : 'F'}`}>
+            </Button>
           </ThemedText>
+          <ThemedText style={styles.condition}>{selectedWeather.condition}</ThemedText>
         </ThemedView>
       ) : (
-        <ThemedText style={styles.loading}>No weather data available</ThemedText>
+        <ThemedText style={styles.loading}>No weather data available for "{selectedCity}" right now.</ThemedText>
       )}
     </ThemedView>
   );
@@ -75,24 +73,38 @@ const styles = StyleSheet.create({
   container: {
     fontFamily: 'Arial, sans-serif',
     textAlign: 'center',
-    padding: 20,
     color: '#cacaca',
+    flex: 1,
   },
   header: {
     fontSize: 32,
-    marginBottom: 20,
+    paddingTop: 16,
+    paddingBottom: 32,
+    fontWeight: 800,
+    backgroundColor: '#222',
+  },
+  dropdown: {
+    color: '#eee',
+    flex:2,
   },
   toggleButton: {
-    padding: 10,
-    marginBottom: 20,
+    padding: 12,
     cursor: 'pointer',
   },
   selectorContainer: {
-    marginBottom: 10,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#444',
+    borderRadius: 5,
+    backgroundColor: '#222',
+    paddingLeft: 12,
+    flexDirection: 'row',
+    margin:12
   },
   label: {
     marginRight: 10,
-    fontSize: 14,
+    fontSize: 16,
+    verticalAlign: "middle",
   },
   selector: {
     padding: 5,
@@ -103,21 +115,28 @@ const styles = StyleSheet.create({
     borderColor: '#555',
     borderRadius: 5,
     backgroundColor: '#222',
-    padding: 10,
-    margin: 5,
-    width: 192,
-    height:96,
+    padding: 12,
+    margin: 12,
     textAlign: 'left',
   },
   city: {
     fontWeight: 'bold',
-    fontSize: 22,
-  },
-  condition: {
+    fontSize: 19,
+    lineHeight:22,
     color: '#888',
   },
+  condition: {
+    color: '#ccc',
+    fontSize: 24,
+    lineHeight:28,
+  },
   temperature: {
-    color: '#e2e2e2',
+    fontWeight: 'bold',
+    color: '#e9e9e9',
+    fontSize: 36,
+    lineHeight:42,
+    marginTop:52,
+    flexDirection: 'row',
   },
   loading: {
     color: '#999',
