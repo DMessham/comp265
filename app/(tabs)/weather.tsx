@@ -34,14 +34,14 @@ function alertMSG(temp:number) {
     return("Remember to take breaks when outside and get some electrolytes with your water!")
   }else if(temp < 45){
     return("Take frequent breaks from the outdoors and remember to get some electrolytes with your water!")
-  }else if(temp > 60){
-    return(`Are you on fire yet?\n"It's the end of the world as we know it\nIt's the end of the world as we know it\nIt's the end of the world as we know it, and I feel fine"\n from R.E.M`)
-  }else if(temp > 45){
-    return("Congrats on the new record! Try not to overheat!")
   }else if(temp == 420){
     return("Heeyyy man")
   }else if(temp == 666){
     return("REPENT!!! THE END IS NIGH\NAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+  }else if(temp > 60){
+    return(`Are you on fire yet?\n"It's the end of the world as we know it\nIt's the end of the world as we know it\nIt's the end of the world as we know it, and I feel fine"\n from R.E.M`)
+  }else if(temp > 45){
+    return("Congrats on the new record! Try not to overheat!")
   } else{
     return("We don't know what to say!\nSomething has broken, Please let us know about this, and include info about your location, internet connection, and device so we can fix it.")
   }
