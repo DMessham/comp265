@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from "@/components/themed-view";
 
@@ -55,7 +55,7 @@ function WeatherApp() {
 
   // Static weather data
   const weatherData = [
-    { city: 'Saskatoon', temperatureC: 22, condition: 'Sunny', feelsLikeC: 26 },
+    { city: 'Saskatoon', temperatureC: 22, condition: 'Sunny' },
     { city: 'Regina', temperatureC: 19, condition: 'Cloudy' },
     { city: 'Prince Albert', temperatureC: -200, condition: 'Rainy' },
     { city: 'Moose Jaw', temperatureC: 61, condition: null },
@@ -94,7 +94,7 @@ function WeatherApp() {
             </Picker.Item>
           ))}
         </Picker>
-        
+
       </View>
       {selectedWeather ? (
         <ThemedView style={styles.weatherCard}>
@@ -105,12 +105,12 @@ function WeatherApp() {
               onPress={toggleUnit}
               style={styles.toggleButton}
               accessibilityHint={`${unit === 'C' ? 'Switch to F' : 'Switch to C'}`}>
-                <ThemedText style={styles.toggleButton}> | {unit === 'C' ? 'F' : 'C'}
-                </ThemedText>
+              <ThemedText style={styles.toggleButton}> | {unit === 'C' ? 'F' : 'C'}
+              </ThemedText>
             </Pressable>
           </ThemedText>
           <ThemedText style={styles.condition}>{selectedWeather.condition}</ThemedText>
-          
+
           <ThemedText>
             {alertMSG(selectedWeather.temperatureC)}
           </ThemedText>
@@ -202,8 +202,8 @@ const styles = StyleSheet.create({
     lineHeight: 42,
     marginTop: 52,
     flexDirection: 'row',
-    gap:13,
-    alignContent:"flex-end",
+    gap: 13,
+    alignContent: "flex-end",
   },
   loading: {
     color: '#999',
