@@ -1,7 +1,6 @@
-# Welcome to your Expo app 👋
+# Comp 265
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
+This is a repo for my comp265 class work
 ## Get started
 
 1. Install dependencies
@@ -25,44 +24,48 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
+## A1 Plan
 
-When you're ready, run:
+transit app using transitland API
 
-```bash
-npm run reset-project
-```
+for now use google maps to display map views, but long term i want to use OSM
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
 
-To learn more about developing your project with Expo, look at the following resources:
+### API usage & data processing:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Get api calls to transitland working using hardcoded params
 
-## Join the community
+Make functions that get data and format it to pass to display layer
 
-Join our community of developers creating universal apps.
+make it so ui controls can affect what the api calls are
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+add google maps display, using an array with objects for each stop,transfer/etc that gets used to drop a pin and draw a line between relevent pins
 
-## E1 Plan
+## long term for future assignemnts
 
-Elements i need: Button, Text, Dropdown or radio buttons
+- realtime turn-by-turn navigation processed locally
 
-## to get something functional in expo go with only one error relating to the button text
+- bike routing
 
-I followed the inclass demo for the dropdown
+- use locally cached OSM maps for offline nav
 
-I also copied a bit from the kitchen sink for replacing the divs
+- nightime red-on-black colorscheme option for lowlight
 
-## testing on device
+- make it closer to the figma proto from DSGN-210-A3
 
-errors:
+### Display side:
 
-## styling
+make a placeholder component to display the api results with minimal formatting
 
-apply my "standard" colorscheme
+make a component that allows some manual ugly controls to make calls to the api for testing
+
+make components that use to display a list, each type of item, and the parts of each item
+
+make a searchbox
+
+make a timeline syle display for showing schedules
+
+make a set of components for showing a trip, and real time guidence
+
+## A1 Reflection
