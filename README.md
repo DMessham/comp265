@@ -26,13 +26,15 @@ You can start developing by editing the files inside the **app** directory. This
 
 ## A1 Plan
 
-transit app using transitland API
+Android transit app using transitland API
 
 for now use google maps to display map views, but long term i want to use OSM
 
 
 
 ### API usage & data processing:
+
+https://www.npmjs.com/package/transitland-rest-client
 
 Get api calls to transitland working using hardcoded params
 
@@ -41,6 +43,47 @@ Make functions that get data and format it to pass to display layer
 make it so ui controls can affect what the api calls are
 
 add google maps display, using an array with objects for each stop,transfer/etc that gets used to drop a pin and draw a line between relevent pins
+
+https://www.npmjs.com/package/react-native-maps 
+
+https://www.npmjs.com/package/expo-calendar
+
+https://www.npmjs.com/package/react-native-date-picker
+
+
+https://www.npmjs.com/package/react-native-render-html // for testing work
+
+https://www.npmjs.com/package/react-native-permissions // to get location perms
+
+https://www.npmjs.com/package/expo-notifications //for nav info, service alerts and reminders
+
+https://www.npmjs.com/package/markdown-to-jsx // for help info 
+
+https://www.npmjs.com/package/expo-speech //headphone alerts for things like what stop to get off
+
+#### useful things i MAY want to use
+
+https://www.npmjs.com/package/minotor //realtime routing!!!
+
+https://www.npmjs.com/package/gtfs-utils
+
+https://www.npmjs.com/package/gtfs-types
+
+https://www.npmjs.com/package/transit-departures-widget
+
+https://www.npmjs.com/package/corequery
+
+https://www.npmjs.com/package/gtfs
+
+https://www.npmjs.com/package/bwip-js //barcode stuff
+
+https://www.npmjs.com/package/gtfs-to-html
+
+https://www.npmjs.com/package/@native-html/css-processor
+
+https://www.npmjs.com/package/@opentripplanner/transit-vehicle-overlay
+
+
 
 ## long term for future assignemnts
 
