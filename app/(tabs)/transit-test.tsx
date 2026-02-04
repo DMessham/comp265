@@ -246,10 +246,7 @@ function DataPanel({ state, title, subtitle, successContent, loadingMessage, err
  * - Uses only core React Native components.
  * - Includes a few extra primitives (TextInput, Switch, Image, Pressable)
  */
-export default function KitchenSinkStatesScreen() {
-    const state = "loading"; // loading | error | empty | success
-
-    const successContent = <ProfileExample />;
+export default function transitHomeScreen() {
 
     return (
         <SafeAreaView style={styles.page}>
@@ -261,9 +258,7 @@ export default function KitchenSinkStatesScreen() {
                         represent loading, error, empty, and success states.
                     </ThemedText>
 
-                    <TransitListItem itemType="loading" titleText="Example listitem">test</TransitListItem>
-
-                    {/* <ControlsExample></ControlsExample> */}
+                    <TransitListItem itemType="loading" titleText="Example listitem"><text>test</text></TransitListItem>
 
                     <ThemedText style={styles.footer}>
                         Next step: refactor each state card into a reusable DataPanel component.
@@ -272,78 +267,6 @@ export default function KitchenSinkStatesScreen() {
             </ScrollView>
         </SafeAreaView>
     );
-}
-
-function Tag({ label }: {label:string}) {
-    return (
-        <ThemedView style={styles.tag}>
-            <ThemedText style={styles.tagText}>{label}</ThemedText>
-        </ThemedView>
-    );
-}
-
-function ProfileExample() {
-    return (
-        <>
-            <ThemedView style={styles.profile}>
-                {/* <Image
-                    source={{ uri: "https://picsum.photos/100" }}
-                    style={styles.avatar}
-                /> */}
-                <ThemedView style={{ flex: 1 }}>
-                    <ThemedText style={styles.profileName}>Taylor Example</ThemedText>
-                    <ThemedText style={styles.mutedSmall}>Product Designer • Regina</ThemedText>
-
-                    <ThemedView style={styles.tagsRow}>
-                        <Tag label="Calm UI" />
-                        <Tag label="Readable" />
-                        <Tag label="Consistent" />
-                    </ThemedView>
-                </ThemedView>
-            </ThemedView>
-
-            <Pressable
-                style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
-                onPress={() => Alert.alert("Action", "Primary actions should be obvious.")}
-            >
-                <ThemedText style={styles.buttonText}>Primary Action</ThemedText>
-            </Pressable>
-        </>
-    )
-}
-
-function ControlsExample() {
-    const [isOnline, setIsOnline] = useState(true);
-    const [query, setQuery] = useState("");
-
-    return (
-        <>
-            <Card title="Form Control Examples" subtitle="Common input controls used in mobile apps.">
-                <ThemedView>
-                    <ThemedText style={styles.label}>Search</ThemedText>
-                    <TextInput
-                        value={query}
-                        onChangeText={setQuery}
-                        placeholder="Type something…"
-                        style={styles.input}
-                    />
-
-                </ThemedView>
-
-                <ThemedView style={styles.row}>
-                    <ThemedText style={styles.label}>Online</ThemedText>
-                    <Switch value={isOnline} onValueChange={setIsOnline} />
-                </ThemedView>
-
-                <Pressable
-                    style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
-                    onPress={() => Alert.alert("Pressed", "Buttons should give feedback.")}
-                >
-                    <ThemedText style={styles.buttonText}>Pressable Example</ThemedText>
-                </Pressable>
-            </Card>
-        </>
-    )
 }
 
 const styles = StyleSheet.create({
