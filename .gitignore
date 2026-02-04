@@ -38,6 +38,10 @@ yarn-error.*
 
 app-example
 
+*.keys
+
+
+
 # generated native folders
 /ios
 /android
