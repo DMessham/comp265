@@ -1,14 +1,13 @@
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Spacing } from "@/constants/theme";
 import * as React from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import {
     Appbar,
-    Card,
     Divider,
     IconButton,
     List,
-    Text,
+    Text
 } from "react-native-paper";
 
 type routesRow = {
@@ -22,7 +21,7 @@ type routesRow = {
 
 type stopListItem = {
     name: string;
-    routeNumber: string;
+    address: string;
     arrivalTime: number;
     nextArrivalTime: number;
     latitude: number;
@@ -31,48 +30,36 @@ type stopListItem = {
     transitID: string;
 };
 
-type RouteCard = {
-    title: string;
-    short: string;  // route number, but its printed 
-    nearstop: number;
-    nextArrivalTime: number;
-};
 
 type Props = {
     city: string;
     condition: string;
-    short: number;
-    nextArrivalTime: number;
-    arrivalTime: number;
     routes: routesRow[];
 };
 
 export function WeatherHeroPaperView({
     city = "Saskatoon Transit",
-    condition = "City Center",
-    short = 8,
-    arrivalTime = 20,
-    nextArrivalTime = 12,
+    condition = "Normal",
     routes = [
         {
-            name: "City Center", routeNumber: "cloud.sun.bolt.fill", arrivalTime: 19, nextArrivalTime: 10, onestopID: "",
+            name: "City Center", routeNumber: "8", arrivalTime: 3, nextArrivalTime: 13, onestopID: "",
             stops: [
-                { name: "Downtown Terminal West", routeNumber: "sun.horizon", arrivalTime: 20, nextArrivalTime: 12, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" },
-                { name: "The Meadows", routeNumber: "sun.horizon", arrivalTime: 20, nextArrivalTime: 12, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" }
+                { name: "Downtown Terminal West", address: "sun.horizon", arrivalTime: 2, nextArrivalTime: 12, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" },
+                { name: "The Meadows", address: "sun.horizon", arrivalTime: 2, nextArrivalTime: 12, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" }
             ]
         },
         {
-            name: "The Meadows", routeNumber: "sun.horizon", arrivalTime: 20, nextArrivalTime: 12, onestopID: "",
+            name: "The Meadows", routeNumber: "87", arrivalTime: 2, nextArrivalTime: 32, onestopID: "",
             stops: [
-                { name: "Downtown Terminal West", routeNumber: "sun.horizon", arrivalTime: 20, nextArrivalTime: 12, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" },
-                { name: "The Meadows", routeNumber: "sun.horizon", arrivalTime: 20, nextArrivalTime: 12, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" }
+                { name: "Downtown Terminal West", address: "sun.horizon", arrivalTime: 20, nextArrivalTime: 50, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" },
+                { name: "The Meadows", address: "sun.horizon", arrivalTime: 32, nextArrivalTime: 62, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" }
             ]
         },
         {
-            name: "", routeNumber: "cloud.snow", arrivalTime: 21, nextArrivalTime: 13, onestopID: "",
+            name: "Lawson", routeNumber: "30", arrivalTime: 21, nextArrivalTime: 13, onestopID: "",
             stops: [
-                { name: "Downtown Terminal West", routeNumber: "sun.horizon", arrivalTime: 20, nextArrivalTime: 12, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" },
-                { name: "The Meadows", routeNumber: "sun.horizon", arrivalTime: 20, nextArrivalTime: 12, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" }
+                { name: "Downtown Terminal West", address: "sun.horizon", arrivalTime: 20, nextArrivalTime: 62, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" },
+                { name: "The Meadows", address: "sun.horizon", arrivalTime: 20, nextArrivalTime: 62, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" }
             ]
         }
     ]
@@ -97,7 +84,7 @@ export function WeatherHeroPaperView({
                         </Text>
 
                         <IconButton
-                            routeNumber="map-marker"
+                            icon="map-marker"
                             size={18}
                             iconColor="rgba(255,255,255,0.95)"
                             style={styles.iconBtnTight}
@@ -123,37 +110,8 @@ export function WeatherHeroPaperView({
                 </View>
             </Appbar.Header>
 
-            {/* Horizontal routes List */}
-            <View style={styles.routesListHorizontal}>
-                <Text variant="labelLarge" style={styles.hScrollTitle}>
-                    Favorite
-                </Text>
-
-                <FlatList
-                    data={routes}
-                    horizontal
-                    keyExtractor={(item) => item.name}
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={({ item }) => (
-                        <Card style={styles.miniCard} mode="contained">
-                            <Card.Content style={styles.miniCardContent}>
-                                <Text style={styles.miniDay}>{item.name}</Text>
-
-                                <IconSymbol size={22} name={item.routeNumber} color="rgba(255,255,255,0.9)" />
-
-                                <Text style={styles.miniTemps}>
-                                    In {item.arrivalTime}/{item.nextArrivalTime} mins
-                                </Text>
-                            </Card.Content>
-                        </Card>
-                    )}
-                />
-            </View>
-
             {/* Hero Section */}
             <View style={styles.hero}>
-
-
                 <View style={styles.illustrationWrap}>
                     <IconSymbol
                         name="sun.horizon"
@@ -172,28 +130,45 @@ export function WeatherHeroPaperView({
                             titleStyle={styles.routesDay}
                             left={() => (
                                 <Text style={styles.routesTemps}>
-                                    {short}
+                                    {row.routeNumber}
                                 </Text>
                             )}
                             right={() => (
                                 <Text style={styles.routesTemps}>
                                     In {row.arrivalTime} & {row.nextArrivalTime} Minutes
+                                    
                                 </Text>
+                                
                             )}
                             style={styles.routesRow}
                         />
                         <View style={styles.stopsCard}>
-
-                            <Text variant="labelLarge" style={styles.hScrollTitle}>
-                                Stops
-                            </Text>
+                            
+                            <React.Fragment key={row.name+"-stoplistHeader"}>
+                                <List.Item
+                                    title={row.stops.length+" stops"}
+                                    titleStyle={styles.routesTemps}
+                                    right={() => (
+                                        <IconButton
+                                            icon="chevron-down"
+                                            size={22}
+                                            iconColor="rgba(255,255,255,0.95)"
+                                            
+                                            style={styles.iconBtnTight}
+                                            // onPress={onPressSettings}
+                                        />
+                                    )}
+                                    style={styles.stoplistHeaderRow}
+                                />
+                            </React.Fragment>
                             {row.stops.map((row2, idx) => (
                                 <React.Fragment key={row2.name+"-stop_"+row2.name}>
                                     <List.Item
                                         title={row2.name}
                                         titleStyle={styles.routesDay}
                                         left={() => (
-                                            <IconSymbol size={22} name={row2.routeNumber} color="rgba(255,255,255,0.9)" />
+                                            <IconSymbol size={22} name="busstop" color="rgba(255,255,255,0.9)" 
+                                            style={styles.iconBtnTight} />
                                         )}
                                         right={() => (
                                             <Text style={styles.routesTemps}>
@@ -252,8 +227,8 @@ const styles = StyleSheet.create({
     },
 
     iconBtnTight: {
-        width: 28,
-        height: 28,
+        width: 24,
+        height: 24,
     },
 
     hero: {
@@ -297,7 +272,8 @@ const styles = StyleSheet.create({
     routesCard: {
         borderRadius: 16,
         padding: Spacing.md,
-
+        
+        paddingTop: Spacing.sm,
         backgroundColor: "rgba(255,255,255,0.25)",
         borderWidth: StyleSheet.hairlineWidth,
         borderColor: "rgba(255,255,255,0.25)",
@@ -305,8 +281,9 @@ const styles = StyleSheet.create({
 
     stopsCard: {
         borderRadius: 12,
-        padding: Spacing.md,
-
+        padding: Spacing.sm,
+        paddingTop: 0,
+        margin: 0,
         backgroundColor: "rgba(255,255,255,0.25)",
         borderWidth: StyleSheet.hairlineWidth,
         borderColor: "rgba(255,255,255,0.25)",
@@ -315,6 +292,13 @@ const styles = StyleSheet.create({
     routesRow: {
         flexDirection: "row",
         alignItems: "center",
+    },
+
+    stoplistHeaderRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        margin:0,
+        padding:0,
     },
 
     routesDay: {
