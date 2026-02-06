@@ -40,7 +40,7 @@ type Props = {
     condition: string;
     routes: routesRow[];
 };
-
+// this dummy data is not the best, but most of the values should be there (that lat/long isw stupid tho lol)
 export function WeatherHeroPaperView({
     city = "Saskatoon Transit",
     condition = "Normal",
@@ -75,11 +75,11 @@ export function WeatherHeroPaperView({
                 <View style={styles.topRow}>
                     <View style={styles.tempRow}>
                         {/* TODO add logo */}
-                        <Text variant="displayLarge" style={styles.tempText}>
+                        <Text variant="displaySmall" style={styles.tempText}>
                             TransitTrak
                         </Text>
-                        <Text variant="headlineMedium" style={styles.degreeMark}>
-                            alpha v0.2.0
+                        <Text variant="headlineSmall" style={styles.degreeMark}>
+                            a0.2.0
                         </Text>
                     </View>
 
@@ -170,7 +170,7 @@ export function WeatherHeroPaperView({
                             </React.Fragment>
                             {/* stop list */}
                             {row.stops.map((row2, idx) => (
-                                <React.Fragment key={row2.name + "-stop_" + row2.name}>
+                                <React.Fragment key={row.name + "-stop_" + row2.name}>
                                     <List.Item
                                         title={row2.name}
                                         titleStyle={styles.routesDay}
