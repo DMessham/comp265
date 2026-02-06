@@ -10,6 +10,10 @@ import {
     Text
 } from "react-native-paper";
 
+// TODO: make something that can convert the transitland API stuff to a nicer format so i dont have a repeat of MULT213-a3, 
+// where i was doing data stuff in what should have been the view layer.
+// also need to figure out how to integrate google maps as a node module, because all the transitland & GTFS modules that i tried have horrible documentation
+
 type routesRow = {
     name: string;
     routeNumber: string;  // MaterialIcon name, e.g. "weather-cloudy"
@@ -70,11 +74,12 @@ export function WeatherHeroPaperView({
             <Appbar.Header style={styles.appbar}>
                 <View style={styles.topRow}>
                     <View style={styles.tempRow}>
+                        {/* TODO add logo */}
                         <Text variant="displayLarge" style={styles.tempText}>
-                            TransitTrack
+                            TransitTrak
                         </Text>
                         <Text variant="headlineMedium" style={styles.degreeMark}>
-                            beta
+                            alpha v0.2.0
                         </Text>
                     </View>
 
@@ -119,11 +124,12 @@ export function WeatherHeroPaperView({
                         color="rgba(245, 242, 18, 0.95)"
                     />
                 </View>
+                {/* TODO: add map */}
             </View>
 
-            {/* Vertical routes List */}
-                {routes.map((row, idx) => (
-                    <View style={styles.routesCard}>
+            {/* routes List */}
+            {routes.map((row, idx) => (
+                <View style={styles.routesCard}>
                     <React.Fragment key={row.name}>
                         <List.Item
                             title={row.name}
@@ -136,39 +142,41 @@ export function WeatherHeroPaperView({
                             right={() => (
                                 <Text style={styles.routesTemps}>
                                     In {row.arrivalTime} & {row.nextArrivalTime} Minutes
-                                    
+
                                 </Text>
-                                
+
                             )}
                             style={styles.routesRow}
                         />
                         <View style={styles.stopsCard}>
-                            
-                            <React.Fragment key={row.name+"-stoplistHeader"}>
+                            {/* TODO: make hide/show functions work */}
+                            <React.Fragment key={row.name + "-stoplistHeader"}>
                                 <List.Item
-                                    title={row.stops.length+" stops"}
+                                    title={row.stops.length + " stops"}
                                     titleStyle={styles.routesTemps}
                                     right={() => (
                                         <IconButton
                                             icon="chevron-down"
                                             size={22}
                                             iconColor="rgba(255,255,255,0.95)"
-                                            
+
                                             style={styles.iconBtnTight}
-                                            // onPress={onPressSettings}
+                                        // onPress={onPressSettings}
                                         />
                                     )}
                                     style={styles.stoplistHeaderRow}
                                 />
+
                             </React.Fragment>
+                            {/* stop list */}
                             {row.stops.map((row2, idx) => (
-                                <React.Fragment key={row2.name+"-stop_"+row2.name}>
+                                <React.Fragment key={row2.name + "-stop_" + row2.name}>
                                     <List.Item
                                         title={row2.name}
                                         titleStyle={styles.routesDay}
                                         left={() => (
-                                            <IconSymbol size={22} name="busstop" color="rgba(255,255,255,0.9)" 
-                                            style={styles.iconBtnTight} />
+                                            <IconSymbol size={22} name="busstop" color="rgba(255,255,255,0.9)"
+                                                style={styles.iconBtnTight} />
                                         )}
                                         right={() => (
                                             <Text style={styles.routesTemps}>
@@ -188,14 +196,16 @@ export function WeatherHeroPaperView({
                             <Divider style={styles.divider} />
                         ) : null}
                     </React.Fragment>
-            </View>
-                    
-                ))}
+                </View>
+
+            ))}
 
 
         </View>
     );
 }
+
+// TODO: clean up styles, and remove weather related references, would also be cool if i could make a landscape/foldable layout work, where the map is on the side instead of the top
 
 const styles = StyleSheet.create({
     screen: {
@@ -273,7 +283,7 @@ const styles = StyleSheet.create({
     routesCard: {
         borderRadius: 16,
         padding: Spacing.md,
-        
+
         paddingTop: Spacing.sm,
         backgroundColor: "rgba(255,255,255,0.25)",
         borderWidth: StyleSheet.hairlineWidth,
@@ -298,8 +308,8 @@ const styles = StyleSheet.create({
     stoplistHeaderRow: {
         flexDirection: "row",
         alignItems: "center",
-        margin:0,
-        padding:0,
+        margin: 0,
+        padding: 0,
     },
 
     routesDay: {
