@@ -122,8 +122,8 @@ export function WeatherHeroPaperView({
             </View>
 
             {/* Vertical routes List */}
-            <View style={styles.routesCard}>
                 {routes.map((row, idx) => (
+                    <View style={styles.routesCard}>
                     <React.Fragment key={row.name}>
                         <List.Item
                             title={row.name}
@@ -188,8 +188,9 @@ export function WeatherHeroPaperView({
                             <Divider style={styles.divider} />
                         ) : null}
                     </React.Fragment>
-                ))}
             </View>
+                    
+                ))}
 
 
         </View>
@@ -284,9 +285,9 @@ const styles = StyleSheet.create({
         padding: Spacing.sm,
         paddingTop: 0,
         margin: 0,
-        backgroundColor: "rgba(255,255,255,0.25)",
+        backgroundColor: "rgba(25,25,25,0.5)",
         borderWidth: StyleSheet.hairlineWidth,
-        borderColor: "rgba(255,255,255,0.25)",
+        borderColor: "rgba(255,255,255,0.5)",
     },
 
     routesRow: {
