@@ -8,6 +8,28 @@ import { Platform } from 'react-native';
 const tintColorLight = '#0a7e24';
 const tintColorDark = '#beb';
 
+export const Spacing = {
+  sm: 5,
+  md: 13,
+  lg: 21
+}
+
+export const Radius = {
+  sm: 5,
+  md: 13,
+  lg: 21
+}
+
+export const Typography = {
+  header: {
+    fontSize: 34,
+    fontWeight: "800",
+    color: "#0B1220",
+  },
+  // Primary, Secondary, Loading, Error
+}
+
+
 export const Colors = {
   light: {
     text: '#11181C',
