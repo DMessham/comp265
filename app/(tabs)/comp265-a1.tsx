@@ -1,7 +1,7 @@
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Spacing } from "@/constants/theme";
 import * as React from "react";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import {
     Appbar,
     Divider,
@@ -126,7 +126,7 @@ export function WeatherHeroPaperView({
                 </View>
                 {/* TODO: add map */}
             </View>
-
+            <ScrollView>
             {/* routes List */}
             {routes.map((row, idx) => (
                 <View style={styles.routesCard}>
@@ -199,7 +199,7 @@ export function WeatherHeroPaperView({
                 </View>
 
             ))}
-
+            </ScrollView>
 
         </View>
     );
