@@ -4,10 +4,13 @@ import * as React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import {
     Appbar,
+    Button,
     Divider,
     IconButton,
     List,
-    Text
+    Switch,
+    Text,
+    TextInput
 } from "react-native-paper";
 
 // TODO: make something that can convert the transitland API stuff to a nicer format so i dont have a repeat of MULT213-a3, 
@@ -34,6 +37,10 @@ type stopListItem = {
     transitID: string;
 };
 
+const transitFeedID = "o-c9k0-saskatoontransit"; //saskatoon transit
+
+const apiBaseURL = 'https://transit.land/api/v2/rest'
+
 
 type Props = {
     city: string;
@@ -43,7 +50,6 @@ type Props = {
 // this dummy data is not the best, but most of the values should be there (that lat/long isw stupid tho lol)
 export function WeatherHeroPaperView({
     city = "Saskatoon Transit",
-    condition = "Normal",
     routes = [
         {
             name: "City Center", routeNumber: "8", arrivalTime: 3, nextArrivalTime: 13, onestopID: "",
@@ -75,6 +81,7 @@ export function WeatherHeroPaperView({
                 <View style={styles.topRow}>
                     <View style={styles.tempRow}>
                         {/* TODO add logo */}
+                        <Image></Image>
                         <Text variant="displaySmall" style={styles.tempText}>
                             TransitTrak
                         </Text>
@@ -126,6 +133,15 @@ export function WeatherHeroPaperView({
                 </View>
                 {/* TODO: add map */}
             </View>
+            <View>
+                <TextInput>
+                    {/* TODO add search logic */}
+                </TextInput>
+                <Switch>
+                    {/* select route or stops */}
+                </Switch>
+            </View>
+            
             <ScrollView>
             {/* routes List */}
             {routes.map((row, idx) => (
@@ -144,7 +160,9 @@ export function WeatherHeroPaperView({
                                     In {row.arrivalTime} & {row.nextArrivalTime} Minutes
 
                                 </Text>
-
+                                <Button>
+                                    {/* Show on map */}
+                                </Button>
                             )}
                             style={styles.routesRow}
                         />

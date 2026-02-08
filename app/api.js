@@ -19,8 +19,6 @@ export async function fetchAllRoutes() {
 
   const data = await res.json();
 
-  console.log('Getting all routes', data);
-
   return data.results || [];
 }
 
@@ -54,6 +52,53 @@ export async function fetchRouteStops(route) {
 
   return data.stops || [];
 }
+
+//current Location Button Logic
+//Copied from mult213-a2/a3. TODO: convert to react native
+let latitude = 0.0
+let longitude = 0.0
+const getLocationButton = async () => {
+  console.log(`getting location`)
+  
+  const radius = 250
+  // based off https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
+  if ("geolocation" in navigator) {
+      let nav = navigator.geolocation
+      /* geolocation is available */
+      nav.getCurrentPosition(async (position) =>{
+          latitude = position.coords.latitude
+          longitude = position.coords.longitude
+          console.log(`latitude is`, latitude, `longitude is`, longitude)
+          // at this point, not loading anymore
+          
+          console.log(`Looking for stops within ${radius}m of ${latitude}, ${longitude}:`);
+          let data = await fetchStopsLocation(latitude, longitude, radius);
+          // console.log("Getting map…");
+          // let img = await fetchAreaImage(latitude, longitude, radius);
+          
+          try {
+              //check if there is any data and display it
+              if (data.length === 0) {
+                  console.log(`ErrorNo results found within ${radius}m`);
+                  return;
+              } else {
+                  let message = `Found ${data.length} result(s) within ${radius}m of ${latitude}, ${longitude}:`;
+                  message += (data) // need to format it into a mui list
+              
+                  console.log(message);
+              }
+              return(latitude, longitude)
+              
+          } catch (err) {
+              console.log("error in nearby stops:", err.message, err)
+          }
+      });
+  } else {    
+      /* geolocation IS NOT available */
+      
+      console.log(`Error: Location not available from browser, it may be disabled or not supported`);
+  }    
+};
 
 export async function fetchAreaImage(lat,lon,rad){
   const res = await fetch(
