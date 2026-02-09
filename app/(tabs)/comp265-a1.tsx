@@ -4,7 +4,6 @@ import * as React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import {
     Appbar,
-    Button,
     Divider,
     IconButton,
     List,
@@ -12,6 +11,43 @@ import {
     Text,
     TextInput
 } from "react-native-paper";
+
+// For online api stuff
+import type { FeedResponse } from "transitland-rest-client";
+import Client, { EntityType, OnestopId } from "transitland-rest-client";
+
+const client = new Client("YOUR_API_KEY_HERE");
+// or
+// const client = new Client({
+//   apiKey: "YOUR_API_KEY_HERE",
+//   baseUrl: "https://transit.land/api/v2/rest"
+// });
+
+const { feeds } = await client.fetch<FeedResponse>("feeds");
+// or
+// const { feeds } = await client.fetch<FeedResponse>("/feeds");
+// const { feeds } = await client.fetch<FeedResponse>({
+//   path: "feeds",
+//   query: {
+//     limit: "100",
+//     spec: "gbfs",
+//   }
+// });
+
+
+// Onestop ID Utilities
+const { onestop_id } = feeds[0]; // f-9q9-caltrain
+
+OnestopId.entityTypeOf(onestop_id) === EntityType.Feed;
+OnestopId.geohashOf(onestop_id) === "9q9";
+OnestopId.nameof(onestop_id) === "caltrain";
+
+const onestopId = OnestopId.parse(onestop_id);
+onestopId.entityType === EntityType.Feed;
+onestopId.geohash === "9q9";
+onestopId.name === "caltrain";
+
+
 
 // TODO: make something that can convert the transitland API stuff to a nicer format so i dont have a repeat of MULT213-a3, 
 // where i was doing data stuff in what should have been the view layer.
@@ -81,7 +117,6 @@ export function WeatherHeroPaperView({
                 <View style={styles.topRow}>
                     <View style={styles.tempRow}>
                         {/* TODO add logo */}
-                        <Image></Image>
                         <Text variant="displaySmall" style={styles.tempText}>
                             TransitTrak
                         </Text>
@@ -138,7 +173,7 @@ export function WeatherHeroPaperView({
                     {/* TODO add search logic */}
                 </TextInput>
                 <Switch>
-                    {/* select route or stops */}
+                    {/* offline mode */}
                 </Switch>
             </View>
             
@@ -158,11 +193,8 @@ export function WeatherHeroPaperView({
                             right={() => (
                                 <Text style={styles.routesTemps}>
                                     In {row.arrivalTime} & {row.nextArrivalTime} Minutes
-
+                                        {/* Show on map */}
                                 </Text>
-                                <Button>
-                                    {/* Show on map */}
-                                </Button>
                             )}
                             style={styles.routesRow}
                         />
@@ -193,8 +225,9 @@ export function WeatherHeroPaperView({
                                         title={row2.name}
                                         titleStyle={styles.routesDay}
                                         left={() => (
-                                            <IconSymbol size={22} name="busstop" color="rgba(255,255,255,0.9)"
-                                                style={styles.iconBtnTight} />
+                                            // <IconSymbol size={22} name="busstop" color="rgba(255,255,255,0.9)"
+                                            //     style={styles.iconBtnTight} />
+                                                <Text>stop icon</Text>
                                         )}
                                         right={() => (
                                             <Text style={styles.routesTemps}>
