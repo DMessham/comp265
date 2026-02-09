@@ -2,7 +2,7 @@ import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Spacing } from "@/constants/theme";
 import * as React from "react";
 import { useState } from 'react';
-import { Alert, Platform, ScrollView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Alert, Platform, ScrollView, StyleSheet, View } from "react-native";
 import {
     Appbar,
     Button,
@@ -66,7 +66,7 @@ const apiBaseURL = 'https://transit.land/api/v2/rest'
 
 let onColor = "rgb(95,155,95)"
 
-function showAlert(message) {
+function showAlert(message:string) {
     if (Platform.OS === 'web') {
         window.alert(message);
     } else {
@@ -150,7 +150,7 @@ export function WeatherHeroPaperView({
                             ios_backgroundColor="#3e3e3e"
                             onValueChange={toggleSwitch}
                             value={isOfflineMode}
-                            color="rgb(95,155,95)"
+                            color={onColor}
                         />
                         <IconButton
                             icon="cog-outline"
@@ -166,18 +166,21 @@ export function WeatherHeroPaperView({
 
             {/* Hero Section */}
             <View style={styles.hero}>
-                <View style={styles.illustrationWrap}>
-                    <IconSymbol
-                        name="sun.horizon"
-                        size={150}
+                <IconSymbol
+                        name="hourglass"
+                        size={60}
                         color="rgba(245, 242, 18, 0.95)"
                     />
+                    <ActivityIndicator size="large" color={onColor} />
+                    <Text  style={styles.hero}>It's taking a while to load maps...</Text>
+                    <View style={styles.illustrationWrap}>
                 </View>
                 {/* TODO: add map */}
             </View>
             <View>
                 <TextInput
                     onChangeText={onChangeRouteSeach}
+                    onSubmitEditing={() => showAlert('Route Search not yet implemented')}
                     value={routeSearchQuery}
                     enterKeyHint="search"
                     returnKeyType="search"
@@ -187,6 +190,7 @@ export function WeatherHeroPaperView({
             <View>
                 <TextInput
                     onChangeText={onChangeStopSeach}
+                    onSubmitEditing={() => showAlert('Stop Search not yet implemented')}
                     value={stopSearchQuery}
                     enterKeyHint="search"
                     returnKeyType="search"
@@ -289,6 +293,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#0F2F0A",
         padding: Spacing.lg,
         gap: Spacing.md,
+        paddingBottom:0,
     },
 
     appbar: {
@@ -324,6 +329,7 @@ const styles = StyleSheet.create({
 
     hero: {
         alignItems: "center",
+        color: "rgba(255,255,255,0.95)",
     },
 
     tempRow: {
