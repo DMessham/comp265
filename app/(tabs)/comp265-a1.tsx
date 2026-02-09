@@ -1,9 +1,11 @@
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Spacing } from "@/constants/theme";
 import * as React from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { useState } from 'react';
+import { Alert, Platform, ScrollView, StyleSheet, View } from "react-native";
 import {
     Appbar,
+    Button,
     Divider,
     IconButton,
     List,
@@ -13,8 +15,7 @@ import {
 } from "react-native-paper";
 
 // For online api stuff
-import type { FeedResponse } from "transitland-rest-client";
-import Client, { EntityType, OnestopId } from "transitland-rest-client";
+import Client from "transitland-rest-client";
 
 const client = new Client("YOUR_API_KEY_HERE");
 // or
@@ -23,7 +24,7 @@ const client = new Client("YOUR_API_KEY_HERE");
 //   baseUrl: "https://transit.land/api/v2/rest"
 // });
 
-const { feeds } = await client.fetch<FeedResponse>("feeds");
+// const { feeds } = await client.fetch<FeedResponse>("feeds");
 // or
 // const { feeds } = await client.fetch<FeedResponse>("/feeds");
 // const { feeds } = await client.fetch<FeedResponse>({
@@ -33,20 +34,6 @@ const { feeds } = await client.fetch<FeedResponse>("feeds");
 //     spec: "gbfs",
 //   }
 // });
-
-
-// Onestop ID Utilities
-const { onestop_id } = feeds[0]; // f-9q9-caltrain
-
-OnestopId.entityTypeOf(onestop_id) === EntityType.Feed;
-OnestopId.geohashOf(onestop_id) === "9q9";
-OnestopId.nameof(onestop_id) === "caltrain";
-
-const onestopId = OnestopId.parse(onestop_id);
-onestopId.entityType === EntityType.Feed;
-onestopId.geohash === "9q9";
-onestopId.name === "caltrain";
-
 
 
 // TODO: make something that can convert the transitland API stuff to a nicer format so i dont have a repeat of MULT213-a3, 
@@ -77,6 +64,19 @@ const transitFeedID = "o-c9k0-saskatoontransit"; //saskatoon transit
 
 const apiBaseURL = 'https://transit.land/api/v2/rest'
 
+let onColor = "rgb(95,155,95)"
+
+function showAlert(message) {
+    if (Platform.OS === 'web') {
+        window.alert(message);
+    } else {
+        Alert.alert(message);
+    }
+}
+
+
+
+let offlineModeStart = true;
 
 type Props = {
     city: string;
@@ -85,7 +85,8 @@ type Props = {
 };
 // this dummy data is not the best, but most of the values should be there (that lat/long isw stupid tho lol)
 export function WeatherHeroPaperView({
-    city = "Saskatoon Transit",
+    city = "Saskatoon",
+
     routes = [
         {
             name: "City Center", routeNumber: "8", arrivalTime: 3, nextArrivalTime: 13, onestopID: "",
@@ -110,6 +111,13 @@ export function WeatherHeroPaperView({
         }
     ]
 }: Props) {
+
+    const [isOfflineMode, setIsOfflineMode] = useState(offlineModeStart);
+
+    const [routeSearchQuery, onChangeRouteSeach] = React.useState('');
+    const [stopSearchQuery, onChangeStopSeach] = React.useState('');
+
+    const toggleSwitch = () => setIsOfflineMode(previousState => !previousState);
     return (
         <View style={styles.screen}>
             {/* Top row */}
@@ -120,7 +128,7 @@ export function WeatherHeroPaperView({
                         <Text variant="displaySmall" style={styles.tempText}>
                             TransitTrak
                         </Text>
-                        <Text variant="headlineSmall" style={styles.degreeMark}>
+                        <Text variant="labelLarge" style={styles.degreeMark}>
                             a0.2.0
                         </Text>
                     </View>
@@ -137,13 +145,12 @@ export function WeatherHeroPaperView({
                             style={styles.iconBtnTight}
                         // onPress={onOpenCityMenu}
                         />
-
-                        <IconButton
-                            icon="chevron-down"
-                            size={18}
-                            iconColor="rgba(255,255,255,0.95)"
-                            style={styles.iconBtnTight}
-                        // onPress={onOpenCityMenu}
+                        <Text variant="labelLarge" style={styles.cityText}>Offline Mode</Text>
+                        <Switch
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={toggleSwitch}
+                            value={isOfflineMode}
+                            color="rgb(95,155,95)"
                         />
                         <IconButton
                             icon="cog-outline"
@@ -169,87 +176,105 @@ export function WeatherHeroPaperView({
                 {/* TODO: add map */}
             </View>
             <View>
-                <TextInput>
-                    {/* TODO add search logic */}
-                </TextInput>
-                <Switch>
-                    {/* offline mode */}
-                </Switch>
+                <TextInput
+                    onChangeText={onChangeRouteSeach}
+                    value={routeSearchQuery}
+                    enterKeyHint="search"
+                    returnKeyType="search"
+                    inputMode="search"
+                    placeholder="Search Bus Routes" />
             </View>
-            
+            <View>
+                <TextInput
+                    onChangeText={onChangeStopSeach}
+                    value={stopSearchQuery}
+                    enterKeyHint="search"
+                    returnKeyType="search"
+                    inputMode="search"
+                    placeholder="Search Bus Stops" />
+                {/* TODO add search logic */}
+            </View>
+
             <ScrollView>
-            {/* routes List */}
-            {routes.map((row, idx) => (
-                <View style={styles.routesCard}>
-                    <React.Fragment key={row.name}>
-                        <List.Item
-                            title={row.name}
-                            titleStyle={styles.routesDay}
-                            left={() => (
-                                <Text style={styles.routesTemps}>
-                                    {row.routeNumber}
-                                </Text>
-                            )}
-                            right={() => (
-                                <Text style={styles.routesTemps}>
-                                    In {row.arrivalTime} & {row.nextArrivalTime} Minutes
+                {/* routes List */}
+                {routes.map((row, idx) => (
+                    <View style={styles.routesCard}>
+                        <React.Fragment key={row.name}>
+                            <List.Item
+                                title={row.name}
+                                titleStyle={styles.routesDay}
+                                left={() => (
+                                    <Text style={styles.routesTemps}>
+                                        {row.routeNumber}
+
+                                    </Text>
+                                )}
+                                right={() => (
+                                    <Text style={styles.routesTemps}>
+                                        In {row.arrivalTime} & {row.nextArrivalTime} Minutes
                                         {/* Show on map */}
-                                </Text>
-                            )}
-                            style={styles.routesRow}
-                        />
-                        <View style={styles.stopsCard}>
-                            {/* TODO: make hide/show functions work */}
-                            <React.Fragment key={row.name + "-stoplistHeader"}>
-                                <List.Item
-                                    title={row.stops.length + " stops"}
-                                    titleStyle={styles.routesTemps}
-                                    right={() => (
-                                        <IconButton
-                                            icon="chevron-down"
-                                            size={22}
-                                            iconColor="rgba(255,255,255,0.95)"
+                                    </Text>
 
-                                            style={styles.iconBtnTight}
-                                        // onPress={onPressSettings}
-                                        />
-                                    )}
-                                    style={styles.stoplistHeaderRow}
-                                />
-
-                            </React.Fragment>
-                            {/* stop list */}
-                            {row.stops.map((row2, idx) => (
-                                <React.Fragment key={row.name + "-stop_" + row2.name}>
+                                )}
+                                style={styles.routesRow}
+                            />
+                            <Button
+                                onPress={() => showAlert('map not yet implemented')}
+                                textColor="#fff7" >
+                                Show on map
+                            </Button>
+                            <View style={styles.stopsCard}>
+                                {/* TODO: make hide/show functions work */}
+                                <React.Fragment key={row.name + "-stoplistHeader"}>
                                     <List.Item
-                                        title={row2.name}
-                                        titleStyle={styles.routesDay}
-                                        left={() => (
-                                            // <IconSymbol size={22} name="busstop" color="rgba(255,255,255,0.9)"
-                                            //     style={styles.iconBtnTight} />
-                                                <Text>stop icon</Text>
-                                        )}
+                                        title={row.stops.length + " stops"}
+                                        titleStyle={styles.routesTemps}
                                         right={() => (
-                                            <Text style={styles.routesTemps}>
-                                                In {row2.arrivalTime} & {row2.nextArrivalTime} Minutes
-                                            </Text>
+                                            <IconButton
+                                                icon="chevron-down"
+                                                size={22}
+                                                iconColor="rgba(255,255,255,0.95)"
+
+                                                style={styles.iconBtnTight}
+                                            // onPress={onPressSettings}
+                                            />
                                         )}
-                                        style={styles.routesRow}
+                                        style={styles.stoplistHeaderRow}
                                     />
-                                    {idx < row.stops.length - 1 ? (
-                                        <Divider style={styles.divider} />
-                                    ) : null}
+
                                 </React.Fragment>
-                            ))}
-                        </View>
+                                {/* stop list */}
+                                {row.stops.map((row2, idx) => (
+                                    <React.Fragment key={row.name + "-stop_" + row2.name}>
+                                        <List.Item
+                                            title={row2.name}
+                                            titleStyle={styles.routesDay}
+                                            left={() => (
+                                                // <IconSymbol size={22} name="busstop" color="rgba(255,255,255,0.9)"
+                                                //     style={styles.iconBtnTight} />
+                                                <Text>icon</Text>
+                                            )}
+                                            right={() => (
+                                                <Text style={styles.routesTemps}>
+                                                    In {row2.arrivalTime} & {row2.nextArrivalTime} Minutes
+                                                </Text>
+                                            )}
+                                            style={styles.routesRow}
+                                        />
+                                        {idx < row.stops.length - 1 ? (
+                                            <Divider style={styles.divider} />
+                                        ) : null}
+                                    </React.Fragment>
+                                ))}
+                            </View>
 
-                        {idx < routes.length - 1 ? (
-                            <Divider style={styles.divider} />
-                        ) : null}
-                    </React.Fragment>
-                </View>
+                            {idx < routes.length - 1 ? (
+                                <Divider style={styles.divider} />
+                            ) : null}
+                        </React.Fragment>
+                    </View>
 
-            ))}
+                ))}
             </ScrollView>
 
         </View>
@@ -268,6 +293,10 @@ const styles = StyleSheet.create({
 
     appbar: {
         backgroundColor: "transparent",
+    },
+    buttonRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
 
     topRow: {
@@ -334,7 +363,7 @@ const styles = StyleSheet.create({
     routesCard: {
         borderRadius: 16,
         padding: Spacing.md,
-
+        marginBottom: Spacing.md,
         paddingTop: Spacing.sm,
         backgroundColor: "rgba(255,255,255,0.25)",
         borderWidth: StyleSheet.hairlineWidth,
