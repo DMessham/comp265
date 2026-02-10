@@ -276,10 +276,6 @@ export function WeatherHeroPaperView({
                                     </React.Fragment>
                                 ))}
                             </View>
-
-                            {idx < routes.length - 1 ? (
-                                <Divider style={styles.divider} />
-                            ) : null}
                         </React.Fragment>
                     </View>
 
