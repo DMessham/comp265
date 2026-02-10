@@ -333,8 +333,9 @@ const styles = StyleSheet.create({
       },
 
       stopIcon: {
-        width: 24,
-        height: 24,
+        width: Spacing.lg,
+        height: Spacing.lg,
+        marginInlineStart: Spacing.md
       },
 
     iconBtnTight: {
