@@ -24,9 +24,8 @@ const client = new Client("YOUR_API_KEY_HERE");
 
 
 // TODO: make something that can convert the transitland API stuff to a nicer format so i dont have a repeat of MULT213-a3, 
-// where i was doing data stuff in what should have been the view layer.
-// also need to figure out how to integrate google maps as a node module, because all the transitland & GTFS modules that i tried have horrible documentation
-
+// where i was doing data stuff in what should have been the view layer. also this node module was last updated over 2 years ago, still works tho
+// also need to figure out how to integrate google maps as a node module because the 2 popular react native modules i tried are broken
 type routesRow = {
     name: string;
     routeNumber: string;  // MaterialIcon name, e.g. "weather-cloudy"
