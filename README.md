@@ -111,17 +111,17 @@ make a timeline syle display for showing schedules
 
 make a set of components for showing a trip, and real time guidence
 
-## A1 Reflection
+# A1 Reflection
 
 Had to significatly chage my initial plans, because i realized that those plans were way over ambitious, so i opted to just try and make a ui as similar to my mult213-a3 projct, with minor impovements, and some tweaks to fit asignment requrements.
 
-### What went well:
+## What went well:
 
 The in class exmples, and the starter code were very helpful, and saved me having to rewrite a significant amount of basic boilerplate.
 
 Once i got in the groove i was able to hammer out a crude setup that i could spend time refining
 
-### What didnt go well
+## What didnt go well
 
 The biggest challenge was trying to find a node module that:
  -  fit what i was trying to make
@@ -133,8 +133,19 @@ The biggest challenge was trying to find a node module that:
 
 The map api ones broke everything and the modules for talking directly to the citys GTFS datasets had 0 docs or assumed you already knew way more than i did. the ali i used for mult213-a1 returned data in a format that was hard to work with, which is why i was trying to get the data directly from the city.
 
-### if i had more time
+## if i had more time
 
 I would use example data that followed the format returned by the city or the transitland API, so i could acually try it with real data
 
 I would also have liked to have a working map, even just one that worked seperately without interacting with the rest of the app
+
+# A1 self assesment
+
+Components: 4, The offline mode toggle wa a bit of a kludge to meet the requrements, but in the design the only other place it would make sense is a trip settings page, but nav comes later 
+
+3rd party Modules: 3, the transitland api is called, but the (error) response is not used for anything. I got the transitland api to show plain text from it while testing, but i had to excude that from the git so i didnt leak my api key.
+
+Styling: 3, i didd not have time to add proper icons, or make the area for the map view the rigght size, but everyting alse mostly lines up with what i had in mind
+
+Quality: 3, parts of this were less for making something good, and more just thrown in because the assingment said so.
+
