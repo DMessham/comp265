@@ -1,8 +1,7 @@
-import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Spacing } from "@/constants/theme";
 import * as React from "react";
 import { useState } from 'react';
-import { ActivityIndicator, Alert, Platform, ScrollView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Alert, Image, Platform, ScrollView, StyleSheet, View } from "react-native";
 import {
     Appbar,
     Button,
@@ -117,14 +116,19 @@ export function WeatherHeroPaperView({
     const [routeSearchQuery, onChangeRouteSeach] = React.useState('');
     const [stopSearchQuery, onChangeStopSeach] = React.useState('');
 
-    const toggleSwitch = () => setIsOfflineMode(previousState => !previousState);
+    const toggleSwitch = () => setIsOfflineMode(previousState => !previousState); // copied right from the react native docs lol
     return (
         <View style={styles.screen}>
             {/* Top row */}
             <Appbar.Header style={styles.appbar}>
                 <View style={styles.topRow}>
                     <View style={styles.tempRow}>
-                        {/* TODO add logo */}
+                            <Image
+                            style={styles.logo}
+                            source={{
+                            uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+                            }}
+                        />
                         <Text variant="displaySmall" style={styles.tempText}>
                             TransitTrak
                         </Text>
@@ -166,11 +170,7 @@ export function WeatherHeroPaperView({
 
             {/* Hero Section */}
             <View style={styles.hero}>
-                <IconSymbol
-                        name="hourglass"
-                        size={60}
-                        color="rgba(245, 242, 18, 0.95)"
-                    />
+                
                     <ActivityIndicator size="large" color={onColor} />
                     <Text  style={styles.hero}>It's taking a while to load maps...</Text>
                     <View style={styles.illustrationWrap}>
@@ -256,7 +256,12 @@ export function WeatherHeroPaperView({
                                             left={() => (
                                                 // <IconSymbol size={22} name="busstop" color="rgba(255,255,255,0.9)"
                                                 //     style={styles.iconBtnTight} />
-                                                <Text>icon</Text>
+                                                <Image
+                                                    style={styles.stopIcon}
+                                                    source={{
+                                                    uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+                                                    }}
+                                                />
                                             )}
                                             right={() => (
                                                 <Text style={styles.routesTemps}>
@@ -321,6 +326,16 @@ const styles = StyleSheet.create({
         color: "rgba(255,255,255,0.95)",
         fontWeight: "700",
     },
+
+    logo: {
+        width: 32,
+        height: 32,
+      },
+
+      stopIcon: {
+        width: 24,
+        height: 24,
+      },
 
     iconBtnTight: {
         width: 24,
