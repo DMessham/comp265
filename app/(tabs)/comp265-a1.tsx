@@ -17,22 +17,10 @@ import {
 import Client from "transitland-rest-client";
 
 const client = new Client("YOUR_API_KEY_HERE");
-// or
-// const client = new Client({
-//   apiKey: "YOUR_API_KEY_HERE",
-//   baseUrl: "https://transit.land/api/v2/rest"
-// });
 
 // const { feeds } = await client.fetch<FeedResponse>("feeds");
-// or
-// const { feeds } = await client.fetch<FeedResponse>("/feeds");
-// const { feeds } = await client.fetch<FeedResponse>({
-//   path: "feeds",
-//   query: {
-//     limit: "100",
-//     spec: "gbfs",
-//   }
-// });
+
+// NOTE: Intentionally broken, I aint inclding my actual api key here lol
 
 
 // TODO: make something that can convert the transitland API stuff to a nicer format so i dont have a repeat of MULT213-a3, 
