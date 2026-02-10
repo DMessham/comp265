@@ -229,9 +229,9 @@ export function WeatherHeroPaperView({
                             </Button>
                             <View style={styles.stopsCard}>
                                 {/* TODO: make hide/show functions work */}
-                                <React.Fragment key={row.name + "-stoplistHeader"}>
+                                <React.Fragment key={`${row.name}-stoplistHeader`}>
                                     <List.Item
-                                        title={row.stops.length + " stops"}
+                                        title={`${row.stops.length} stops`}
                                         titleStyle={styles.routesTemps}
                                         right={() => (
                                             <IconButton
@@ -249,7 +249,7 @@ export function WeatherHeroPaperView({
                                 </React.Fragment>
                                 {/* stop list */}
                                 {row.stops.map((row2, idx) => (
-                                    <React.Fragment key={row.name + "-stop_" + row2.name}>
+                                    <React.Fragment key={`${row.name}+${row2.name}-stoplistHeader`}>
                                         <List.Item
                                             title={row2.name}
                                             titleStyle={styles.routesDay}
