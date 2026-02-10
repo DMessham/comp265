@@ -89,24 +89,24 @@ export function WeatherHeroPaperView({
 
     routes = [
         {
-            name: "City Center", routeNumber: "8", arrivalTime: 3, nextArrivalTime: 13, onestopID: "",
+            name: "8th Street / City Center", routeNumber: "8", arrivalTime: 3, nextArrivalTime: 13, onestopID: "",
             stops: [
-                { name: "Downtown Terminal West", address: "sun.horizon", arrivalTime: 2, nextArrivalTime: 12, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" },
-                { name: "The Meadows", address: "sun.horizon", arrivalTime: 2, nextArrivalTime: 12, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" }
+                { name: "Downtown Terminal West", address: "23rd St E / 3rd Ave N", arrivalTime: 2, nextArrivalTime: 12, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" },
+                { name: "Center Mall Terminal O/B", address: "3310 8th Street E", arrivalTime: 2, nextArrivalTime: 12, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" }
             ]
         },
         {
-            name: "The Meadows", routeNumber: "87", arrivalTime: 2, nextArrivalTime: 32, onestopID: "",
+            name: "The Meadows / Center Mall", routeNumber: "87", arrivalTime: 2, nextArrivalTime: 32, onestopID: "",
             stops: [
-                { name: "Downtown Terminal West", address: "sun.horizon", arrivalTime: 20, nextArrivalTime: 50, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" },
-                { name: "The Meadows", address: "sun.horizon", arrivalTime: 32, nextArrivalTime: 62, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" }
+                { name: "Center Mall Terminal I/B", address: "3310 8th Street E", arrivalTime: 20, nextArrivalTime: 50, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" },
+                { name: "The Meadows", address: "Taylor/Rosewood Gate N", arrivalTime: 32, nextArrivalTime: 62, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" }
             ]
         },
         {
-            name: "Lawson", routeNumber: "30", arrivalTime: 21, nextArrivalTime: 13, onestopID: "",
+            name: "Lawson Heights / City Center", routeNumber: "30", arrivalTime: 21, nextArrivalTime: 13, onestopID: "",
             stops: [
-                { name: "Downtown Terminal West", address: "sun.horizon", arrivalTime: 20, nextArrivalTime: 62, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" },
-                { name: "The Meadows", address: "sun.horizon", arrivalTime: 20, nextArrivalTime: 62, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" }
+                { name: "Downtown Terminal West", address: "23rd St E / 3rd Ave N", arrivalTime: 20, nextArrivalTime: 62, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" },
+                { name: "Lawson Terminal O/B", address: "Primrose Dr / Pinehouse Dr", arrivalTime: 20, nextArrivalTime: 62, latitude: -2, longitude: 2, onestopID: "onestopID", transitID: "transitStopID" }
             ]
         }
     ]
